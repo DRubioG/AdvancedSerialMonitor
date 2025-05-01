@@ -6,29 +6,226 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>810</width>
-    <height>600</height>
+    <width>986</width>
+    <height>658</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Advanced Serial Monitor</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QTextEdit" name="text_data">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>10</y>
-      <width>141</width>
+      <x>10</x>
+      <y>70</y>
+      <width>451</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QTableView" name="table_serial">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>70</y>
+      <width>481</width>
+      <height>401</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="text_hex">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>451</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>121</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Hexadecimal Data</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>121</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Serial Data</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>50</y>
+      <width>121</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Serial Timing</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>530</y>
+      <width>351</width>
       <height>25</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QPushButton" name="pushButton_send">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>10</y>
+      <x>410</x>
+      <y>530</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Send</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>570</y>
+      <width>41</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Parity:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_parity">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>570</y>
+      <width>79</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>None</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Odd</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Even</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mark</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Space</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox_flow_control">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>570</y>
+      <width>79</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>570</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Flow Control:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>580</y>
+      <width>61</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop Bit:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_stop_bit">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>580</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>One</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>One Point Five</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Two</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>490</y>
       <width>71</width>
       <height>17</height>
      </rect>
@@ -37,14 +234,76 @@
      <string>Serial Port</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QComboBox" name="comboBox_uart">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>70</y>
-      <width>791</width>
-      <height>481</height>
+      <x>110</x>
+      <y>490</y>
+      <width>141</width>
+      <height>25</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_close">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>530</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Close</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_bauds">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>490</y>
+      <width>79</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>490</y>
+      <width>51</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Bauds:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_open">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>490</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Open</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_add_time">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>50</y>
+      <width>88</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add time</string>
     </property>
    </widget>
   </widget>
@@ -53,10 +312,22 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>810</width>
+     <width>986</width>
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+   </widget>
+   <addaction name="menuMenu"/>
+   <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
