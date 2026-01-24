@@ -1,57 +1,58 @@
 import sys
 import serial
-import threading
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QTextEdit, QLineEdit, QPushButton
+import time
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QTextEdit
+from main_thread import UArtReceiver
 
-
-class VentanaSerie(QWidget):
+class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Puerto Serie")
+        self.setWindowTitle("UART con Pyside6")
         self.resize(400, 300)
 
-        # Configurar diseño
+        self.text_area = QTextEdit()
+        self.send_button = QPushButton("Enviar mensaje")
+        self.send_button1 = QPushButton("Enviar mensaje")
         layout = QVBoxLayout(self)
-        self.texto_recibido = QTextEdit(self)
-        self.texto_recibido.setReadOnly(True)  # Solo lectura para los datos recibidos
-        self.texto_envio = QLineEdit(self)
-        self.boton_enviar = QPushButton("Enviar", self)
+        layout.addWidget(self.text_area)
+        layout.addWidget(self.send_button)
+        layout.addWidget(self.send_button1)
 
-        layout.addWidget(self.texto_recibido)
-        layout.addWidget(self.texto_envio)
-        layout.addWidget(self.boton_enviar)
 
-        # Conectar el botón "Enviar" al método de envío
-        self.boton_enviar.clicked.connect(self.enviar_datos)
+        port = "/dev/ttyUSB0"
+        baudrate = 9600
 
-        # Configurar puerto serie
-        self.puerto = serial.Serial("COM3", baudrate=9600, timeout=1)
+        self.ser = serial.Serial(port, baudrate, timeout=1)
 
-        # Iniciar hilo de lectura
-        self.lectura_activa = True
-        self.hilo_lectura = threading.Thread(target=self.leer_datos, daemon=True)
-        self.hilo_lectura.start()
+        self.receiver = UArtReceiver(port, baudrate)
+        self.receiver.data_received.connect(self.update_text)
+        self.receiver.start()
 
-    def leer_datos(self):
-        while self.lectura_activa:
-            if self.puerto.in_waiting > 0:
-                datos = self.puerto.readline().decode("utf-8").strip()
-                self.texto_recibido.append(f"Recibido: {datos}")
 
-    def enviar_datos(self):
-        mensaje = self.texto_envio.text()
-        if mensaje:
-            self.puerto.write(mensaje.encode("utf-8"))
-            self.texto_envio.clear()
+
+
+        self.send_button.clicked.connect(self.send_message)
+
+
+
+
+
+
+    def update_text(self, msg):
+        self.text_area.append(f"RX: {msg}")
+        if msg.find("Adios") != -1:
+            self.send_button1.setStyleSheet("background-color: green")
+
+    def send_message(self):
+        self.ser.write(b"hola\n")
+        self.text_area.append("TX: hola")
 
     def closeEvent(self, event):
-        self.lectura_activa = False
-        self.puerto.close()
-        super().closeEvent(event)
-
+        self.receiver.stop()
+        event.accept()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    ventana = VentanaSerie()
-    ventana.show()
+    window = MainWindow()
+    window.show()
     sys.exit(app.exec())
